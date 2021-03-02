@@ -1,0 +1,16 @@
+[server]
+    signal_server_host = "127.0.0.1:9091"
+    path = "/ws"
+    domain = "B"
+    grpc_host = "127.0.0.1:5000"
+[ice_servers]
+    [[ice_servers.stun]]
+        urls = "stun:stun.l.google.com:19302"
+    [[ice_servers.turn]]
+        urls = "turn:192.158.29.39?transport=udp"
+        user_name = "unittest"
+        credential = "placeholder"
+        credential_type = 0
+[log]
+    out_dir = "/log/answer"
+    out_file = "answer.log"

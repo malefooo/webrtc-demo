@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package device;
+option go_package = "./device;device";
+
+service Device {
+  rpc OSSInfoCheck(OSSInfo) returns (ResultReplyOSS) {}
+  rpc OSSInfoSubmit(OSSTrueReq) returns (ResultReplyOSS) {}
+
+  rpc AuthLogin(LoginReq) returns (ResultReplyLogin) {}
+
+  rpc ComputeS(ComputeReq) returns (ResultReplyCompute) {}
+
+  rpc Passwd(PasswdReq) returns (ResultReplyPasswd) {}
+}
+
+message OSSInfo {
+  string oss_endpoint = 1;
+  string oss_bucket = 2;
+  string oss_accessKeyID = 3;
+  string oss_accessKeySecret = 4;
+}
+
+message OSSTrueReq {
+  OSSInfo info = 1;
+  bool clean = 2;
+  string sign = 3;
+  string tempID = 4;
+}
+
+message ResultReplyOSS {
+  int32 code = 1;
+  string reason = 2;
+  OSSInfo data = 3;
+}
+
+message LoginReq {
+  string username = 1;
+  string password = 2;
+  string Pkc = 3;
+}
+
+message ResultReplyLogin {
+  int32 code = 1;
+  string reason = 2;
+  string Pkc = 3;
+  OSSInfo data = 4;
+  string tempID = 5;
+}
+
+message ComputeReq {
+  string hash = 1;
+  string Pk1 = 2;
+  string sign = 3;
+  string tempID = 4;
+}
+
+message ResultReplyCompute {
+  int32 code = 1;
+  string reason = 2;
+  string S = 3;
+}
+
+message PasswdReq {
+  string new_password = 1;
+  string sign = 2;
+  string tempID = 3;
+}
+
+message ResultReplyPasswd {
+  int32 code = 1;
+  string reason = 2;
+}

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "Device.proto";
+package warpQP;
+option go_package = "./warpQP;warpQP";
+
+
+enum ReqType{
+  LoginReq = 0;
+
+  ComputeReq = 1;
+
+  PasswdReq = 2;
+
+  OSSInfoCheck = 3;
+
+  OSSInfoSubmit = 4;
+}
+
+message WarpReq {
+
+  ReqType type = 1;
+
+  oneof ReqData {
+      device.OSSTrueReq oSSTrueReq = 2;
+
+      device.LoginReq loginReq = 3;
+
+      device.ComputeReq computeReq = 4;
+
+      device.PasswdReq passwdReq = 5;
+
+      device.OSSInfo oSSInfo = 6;
+  }
+
+}
+
+enum RespType{
+  ResultReplyLogin = 0;
+
+  ResultReplyCompute = 1;
+
+  ResultReplyPasswd = 2;
+
+  ResultReplyOSS = 3;
+}
+
+message WarpResp {
+  RespType type = 1;
+  oneof RespData {
+    device.ResultReplyOSS resultReplyOSS = 2;
+
+    device.ResultReplyLogin resultReplyLogin = 3;
+
+    device.ResultReplyCompute resultReplyCompute = 4;
+
+    device.ResultReplyPasswd resultReplyPasswd = 5;
+  }
+}

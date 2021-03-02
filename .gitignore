@@ -1,0 +1,4 @@
+
+/signal-server-rs/*.lock
+/.idea
+/signal-server-rs/.idea
